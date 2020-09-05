@@ -4,6 +4,7 @@ INCLUDE_DIRECTORIES("/usr/local/include")
 LINK_DIRECTORIES("/usr/local/lib")
 
 ADD_EXECUTABLE(${HOLLYWOOD_TEST} tests.cpp
+                                 tests/actor.cpp
                                  tests/channel.cpp)
 TARGET_LINK_LIBRARIES(${HOLLYWOOD_TEST} gtest)
 
