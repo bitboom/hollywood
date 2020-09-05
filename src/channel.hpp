@@ -22,7 +22,6 @@ template <typename T>
 struct Sender {
     auto send(T&& value) {
         this->tx.set_value(std::forward<T>(value));
-        this->tx = std::promise<T>();
     }
 
     auto pair() -> Receiver<T> {

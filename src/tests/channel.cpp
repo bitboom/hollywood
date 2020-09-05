@@ -21,3 +21,18 @@ TEST(channel, oneshot_thread)
     tx.send(100);
     task.join();
 }
+
+TEST(channel, oneshot_future)
+{
+    auto [tx, rx] = channel<std::future<int>>();
+    std::promise<int> prom;
+    auto fut = prom.get_future();
+
+    tx.send(std::move(fut));
+    auto reFut = rx.recv();
+
+    prom.set_value(100);
+
+    reFut.wait();
+    EXPECT_EQ(reFut.get(), 100);
+}
